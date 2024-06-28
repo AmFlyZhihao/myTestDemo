@@ -1,0 +1,31 @@
+<div id="app">
+
+  {{fullName}}
+  <button @click="clk">点击</button>
+</div>
+<script type="module">
+  import { createApp, ref ,computed,reactive,watchEffect,watch} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+  createApp({
+    setup(){
+        let firstName = ref('aa');
+        let lastName = ref('bb');
+        let fullName = ref('')
+
+        // watchEffect(()=>{
+        //     fullName.value = firstName.value+lastName.value
+        // })
+        watch(firstName,()=>{
+            fullName.value = firstName.value+lastName.value
+        })
+        const clk = ()=>{
+            firstName.value = '测试的'
+        }
+        return {
+            firstName,
+            lastName,
+            fullName,
+            clk
+        }
+    }
+  }).mount('#app')
+</script>

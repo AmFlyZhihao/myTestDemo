@@ -1,0 +1,26 @@
+<div id="app">
+
+  <input type="text" ref="input">
+</div>
+<script type="module">
+  import { createApp, ref ,computed,reactive,onMounted,watchEffect} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+  createApp({
+    setup(){
+        let input =  ref(null);
+        // onMounted(()=>{
+        //     input.value.focus();
+        //     let id = document.querySelector('input')
+        //     console.log(id === input.value)
+        //     // id.innerHTML = '测试的啊'
+        //     console.log(`the component is now mounted.`)
+        // })
+        // 此种方式也可实现聚焦
+        watchEffect(()=>{
+            input.value?.focus();
+        })
+        return {
+            input
+        }
+    }
+  }).mount('#app')
+</script>

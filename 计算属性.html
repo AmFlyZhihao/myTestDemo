@@ -1,0 +1,32 @@
+<div id="app">
+    <h2>{{publishedBooksMessage}}</h2>
+    <button @click="count++">累计</button>
+    <h3 @click="greet($event)">{{count}}</h3>
+</div>
+<script type="module">
+  import { createApp, ref ,computed,reactive} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+  createApp({
+    setup(){
+        const author = reactive({
+            name: 'John Doe',
+            books: [
+                'Vue 2 - Advanced Guide',
+                'Vue 3 - Basic Guide',
+                'Vue 4 - The Mystery'
+            ]
+        })
+        const publishedBooksMessage = computed(()=>{
+            return author.books.length>0? 'book':'NO'
+        });
+        let count = ref(0);
+        const greet = (event)=>{
+            console.log(event.target.tagName)
+        }
+        return {
+            publishedBooksMessage,
+            count,
+            greet
+        }
+    }
+  }).mount('#app')
+</script>

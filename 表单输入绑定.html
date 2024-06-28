@@ -1,0 +1,85 @@
+<div id="app">
+    <h2>{{text}}</h2>
+    <input
+  :value="text"
+  @input="event => text = event.target.value">
+  <!-- 多行文本框 -->
+   <div>
+    <span>Multiline message is:</span>
+    <p style="white-space: pre-line;">{{ message }}</p>
+    <textarea v-model="message" placeholder="add multiple lines"></textarea>
+   </div>
+   <!-- 多选框 -->
+   <div>
+        <h2>多选框演示</h2>
+        <div>Checked names: {{ checkedNames }}</div>
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+   </div>
+   <!-- 单选按钮 -->
+    <div>
+        <h2>单选按钮</h2>
+        <div>Picked: {{ picked }}</div>
+        <input type="radio" id="one" value="One" v-model="picked" />
+        <label for="one">One</label>
+        <input type="radio" id="two" value="Two" v-model="picked" />
+        <label for="two">Two</label>
+    </div>
+    <div>
+        <h2>选择器演示</h2>
+        <div>Selected: {{ selected }}</div>
+        <select v-model="selected" multiple>
+            <!-- <option disabled value="">Please select one</option> -->
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+    </div>
+    <div>
+        <h2></h2>
+    </div>
+    <input
+  type="checkbox"
+  v-model="toggle"
+  :true-value="dynamicTrueValue"
+  :false-value="dynamicFalseValue" />
+  <h2>{{toggle}}</h2>
+  
+</div>
+<script type="module">
+  import { createApp, ref ,computed,reactive} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+  createApp({
+    setup(){
+        let text = ref('');
+        // const getVal = ($event)=>{
+        //     text.value = $event.target.value
+        // }
+        let message = ref('');
+        // 多选
+        const checkedNames = ref([]);
+        // 单选
+        let picked = ref('One');
+        let selected = ref([]);
+        let toggle = ref('YES');
+        let dynamicTrueValue = ref('YES');
+        let dynamicFalseValue = ref('NO');
+        return {
+           text,
+        //    getVal
+            message,
+            checkedNames,
+            picked,
+            selected,
+            toggle,
+            dynamicTrueValue,
+            dynamicFalseValue
+        }
+    }
+  }).mount('#app')
+</script>

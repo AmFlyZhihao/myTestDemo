@@ -1,0 +1,38 @@
+<div id="app">
+    <div v-for="n in 10">{{n}}</div>
+    <h2>{{fullName}}</h2>
+    <h3>{{firstName}}</h3>
+    <h4>{{lastName}}</h4>
+
+    <h2>{{fullName}}</h2>
+    <button @click="clk">点击</button>
+</div>
+<script type="module">
+  import { createApp, ref ,computed,reactive} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+  createApp({
+    setup(){
+        const firstName = ref('John')
+        const lastName = ref('Doe')
+        const clk = ()=>{
+            firstName.value = '测试的'
+        }
+        const fullName = computed({
+            // getter
+            get() {
+                return firstName.value + ' ' + lastName.value
+            },
+            // setter
+            set(newValue) {
+                // 注意：我们这里使用的是解构赋值语法
+                [firstName.value, lastName.value] = newValue.split(' ')
+            }
+        })
+        return {
+            firstName,
+            lastName,
+            fullName,
+            clk
+        }
+    }
+  }).mount('#app')
+</script>
